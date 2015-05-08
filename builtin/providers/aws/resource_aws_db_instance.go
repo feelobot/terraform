@@ -300,7 +300,7 @@ func resourceAwsDbInstanceCreate(d *schema.ResourceData, meta interface{}) error
 }
 
 func resourceAwsDbInstanceRead(d *schema.ResourceData, meta interface{}) error {
-	v, err := resourceAwsDbInstanceRetrieve(d, meta)
+	v, err := resourceAwsBbInstanceRetrieve(d, meta)
 
 	if err != nil {
 		return err
@@ -525,7 +525,7 @@ func resourceAwsDbInstanceUpdate(d *schema.ResourceData, meta interface{}) error
 	return resourceAwsDbInstanceRead(d, meta)
 }
 
-func resourceAwsDbInstanceRetrieve(
+func resourceAwsBbInstanceRetrieve(
 	d *schema.ResourceData, meta interface{}) (*rds.DBInstance, error) {
 	conn := meta.(*AWSClient).rdsconn
 
@@ -558,7 +558,7 @@ func resourceAwsDbInstanceRetrieve(
 func resourceAwsDbInstanceStateRefreshFunc(
 	d *schema.ResourceData, meta interface{}) resource.StateRefreshFunc {
 	return func() (interface{}, string, error) {
-		v, err := resourceAwsDbInstanceRetrieve(d, meta)
+		v, err := resourceAwsBbInstanceRetrieve(d, meta)
 
 		if err != nil {
 			log.Printf("Error on retrieving DB Instance when waiting: %s", err)
